@@ -1,0 +1,13 @@
+{
+  "name": "lease-autofill-app",
+  "version": "1.0.0",
+  "description": "Residential Lease Auto-Fill App with AI",
+  "scripts": {
+    "build": "cd client && npm install && npm run build",
+    "start": "cd server && node index.js",
+    "dev": "concurrently \"cd server && node index.js\" \"cd client && npm run dev\""
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
