@@ -1,4 +1,4 @@
-# 🏠 Residential Lease Generator
+# 🏠 Residential Lease Generator 
 
 AI-powered residential lease auto-fill app. Enter tenant/property info, let AI suggest missing fields, and download a completed California lease PDF.
 
