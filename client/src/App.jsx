@@ -29,7 +29,7 @@ const SECTIONS = [
     fields: [
       { id: "RENTAL AMOUNT Commencing",    label: "Lease start date",       placeholder: "April 1, 2026" },
       { id: "undefined",                   label: "Monthly rent ($)",        placeholder: "2500", type: "number" },
-      { id: "per month in advance on the", label: "Rent due day",            placeholder: "1",    type: "number", readonly: true, autoCalc: true },
+      { id: "per month in advance on the", label: "Rent due day",            placeholder: "1",    type: "number", isDay: true, readonly: true, autoCalc: true },
       { id: "undefined_2", label: "Rent payment address", placeholder: "Auto-filled from property address", wide: true, autoCalc: true },
       { id: "A prorated share of rent in the sum of", label: "Prorated rent ($)", placeholder: "Leave blank if N/A", type: "number" },
       { id: "the period from",             label: "Prorated from",           placeholder: "Leave blank if N/A" },
@@ -368,7 +368,7 @@ export default function App() {
         try {
           const pdfField = form.getTextField(field.id);
           let display = val;
-          if (field.type === "number") display = parseFloat(val).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+          if (field.type === "number" && !field.isDay) display = parseFloat(val).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
           pdfField.setText(display);
         } catch {}
       }
@@ -474,7 +474,7 @@ export default function App() {
                     <input
                       type="text"
                       value={
-                        field.type === "number"
+                        (field.type === "number" && !field.isDay)
                           ? (rawInputs[field.id] !== undefined
                               ? rawInputs[field.id]
                               : (data[field.id] ? `$${parseFloat(data[field.id]).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : ""))
