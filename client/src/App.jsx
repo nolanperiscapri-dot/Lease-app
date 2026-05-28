@@ -187,7 +187,7 @@ function ProratedCalc({ onApply, monthlyRent, leaseStart }) {
           <label style={{ fontSize: 11, fontWeight: 500, color: colors.mid, textTransform: "uppercase", letterSpacing: "0.04em" }}>Monthly Rent ($)</label>
           <input
             type="text"
-            value={focused ? rawRent : (customRent ? `$${parseFloat(customRent).toLocaleString()}` : "")}
+            value={focused ? rawRent : (customRent ? `$${parseFloat(customRent).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : "")}
             onChange={e => {
               const raw = e.target.value.replace(/[^0-9.]/g, "");
               setRawRent(raw);
@@ -368,7 +368,7 @@ export default function App() {
         try {
           const pdfField = form.getTextField(field.id);
           let display = val;
-          if (field.type === "number") display = parseFloat(val).toLocaleString();
+          if (field.type === "number") display = parseFloat(val).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
           pdfField.setText(display);
         } catch {}
       }
@@ -387,7 +387,7 @@ export default function App() {
     setPdfLoading(false);
   }, [data, checks]);
 
-  const fmtMoney = v => v ? `$${parseFloat(v).toLocaleString()}` : "___";
+  const fmtMoney = v => v ? `$${parseFloat(v).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : "___";
 
   const inputStyle = (field) => ({
     padding: "8px 11px",
@@ -477,7 +477,7 @@ export default function App() {
                         field.type === "number"
                           ? (rawInputs[field.id] !== undefined
                               ? rawInputs[field.id]
-                              : (data[field.id] ? `$${parseFloat(data[field.id]).toLocaleString()}` : ""))
+                              : (data[field.id] ? `$${parseFloat(data[field.id]).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : ""))
                           : (data[field.id] || "")
                       }
                       onChange={e => {
